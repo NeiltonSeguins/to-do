@@ -5,7 +5,9 @@ import Tasks from "./components/Tasks";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
   const [totalDeTasksCompletas, setTotalDeTasksCompletas] = useState(0);
 
   useEffect(() => {
@@ -21,15 +23,24 @@ function App() {
     setTotalDeTasksCompletas(tasksCompletas);
   }, [tasks]);
 
+  const updateLocalStorage = (tasks) => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  };
+
   return (
     <>
       <main className="container">
         <h1>To-Do</h1>
-        <Form tasks={tasks} setTasks={setTasks} />
+        <Form
+          tasks={tasks}
+          setTasks={setTasks}
+          updateLocalStorage={updateLocalStorage}
+        />
         <Tasks
           tasks={tasks}
           setTasks={setTasks}
           setTotalDeTasksCompletas={setTotalDeTasksCompletas}
+          updateLocalStorage={updateLocalStorage}
         />
       </main>
       <h3 className="tasks__completas">

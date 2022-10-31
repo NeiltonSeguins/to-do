@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import "./Form.css";
 
-export default function Form({ tasks, setTasks }) {
+export default function Form({ tasks, setTasks, updateLocalStorage }) {
   const [valor, setValor] = useState("");
 
   const onChange = (evento) => {
@@ -16,6 +16,7 @@ export default function Form({ tasks, setTasks }) {
       titulo: valor,
       completa: false,
     };
+    updateLocalStorage([...tasks, novaTask]);
     setTasks([...tasks, novaTask]);
     setValor("");
   };

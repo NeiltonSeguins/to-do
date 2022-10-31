@@ -1,7 +1,7 @@
 import React from "react";
 import estilos from "./Tasks.module.css";
 
-export default function Tasks({ tasks, setTasks }) {
+export default function Tasks({ tasks, setTasks, updateLocalStorage }) {
   const marcaTaskCompleta = (id) => {
     const taskCompleta = tasks.map((task) => {
       if (task.id === id) {
@@ -10,10 +10,13 @@ export default function Tasks({ tasks, setTasks }) {
       return task;
     });
     setTasks(taskCompleta);
+    updateLocalStorage(taskCompleta);
   };
 
   const removeTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const novasTasks = tasks.filter((task) => task.id !== id);
+    setTasks(novasTasks);
+    updateLocalStorage(novasTasks);
   };
 
   return (
