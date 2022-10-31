@@ -12,11 +12,10 @@ export default function Form({ tasks, setTasks }) {
   const onSubmit = (evento) => {
     evento.preventDefault();
     const novaTask = {
-      id: Math.random().toString(10).substring(2,6),
+      id: Math.random().toString(10).substring(2, 6),
       titulo: valor,
-      completa: false
-    }
-    console.log(novaTask)
+      completa: false,
+    };
     setTasks([...tasks, novaTask]);
     setValor("");
   };

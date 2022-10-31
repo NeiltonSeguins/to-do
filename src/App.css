@@ -1,4 +1,4 @@
-main {
+.container {
   text-align: center;
   margin: 32px auto;
   width: 660px;
@@ -10,4 +10,10 @@ main {
 
 .title {
   font-size: 48px;
+}
+
+.tasks__completas {
+  margin: 0 auto;
+  text-align: right;
+  width: 660px;
 }
