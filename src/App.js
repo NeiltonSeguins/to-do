@@ -43,6 +43,7 @@ function App() {
           updateLocalStorage={updateLocalStorage}
         />
       </main>
+      <h3 className="tasks__completas">{`Total de tasks: ${tasks.length}`}</h3>
       <h3 className="tasks__completas">
         {`Total de tasks concluídas: ${totalDeTasksCompletas}%`}
       </h3>

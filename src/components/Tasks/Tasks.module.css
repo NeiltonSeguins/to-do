@@ -2,6 +2,18 @@ ul {
   width: 100%;
 }
 
+span {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  border-radius: 100%;
+  padding: 3px;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -13,6 +25,10 @@ ul {
   margin-bottom: 1rem;
 }
 
-.task__completa{
+.task__completa {
+  filter: opacity(0.5);
+}
+
+.task__completa p {
   text-decoration: line-through;
 }

@@ -24,10 +24,12 @@ export default function Tasks({ tasks, setTasks, updateLocalStorage }) {
       {tasks.map((task) => {
         return (
           <li key={task.id}>
-            <div className={estilos.container}>
-              <p className={`${task.completa ? estilos.task__completa : ""}`}>
-                {task.titulo}
-              </p>
+            <div
+              className={`${estilos.container} ${
+                task.completa ? estilos.task__completa : ""
+              }`}
+            >
+              <p>{task.titulo}</p>
               <span>
                 <button onClick={() => marcaTaskCompleta(task.id)}>✔️</button>
                 <button onClick={() => removeTask(task.id)}>❌</button>
