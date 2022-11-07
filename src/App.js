@@ -1,14 +1,20 @@
-import Form from "./components/Form";
+import { useEffect, useState } from "react";
 import "./styles/global.css";
 import "./App.css";
+import Form from "./components/Form";
 import Tasks from "./components/Tasks";
-import { useEffect, useState } from "react";
+import api from "./services/api";
 
 function App() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
-  );
+  const [tasks, setTasks] = useState([]);
   const [totalDeTasksCompletas, setTotalDeTasksCompletas] = useState(0);
+
+  useEffect(() => {
+    api
+      .get("/tasks")
+      .then((resp) => setTasks(resp.data))
+      .catch((err) => console.log(err));
+  }, [tasks]);
 
   useEffect(() => {
     const tasksCompletas = () => {
@@ -23,24 +29,15 @@ function App() {
     setTotalDeTasksCompletas(tasksCompletas);
   }, [tasks]);
 
-  const updateLocalStorage = (tasks) => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
-
   return (
     <>
       <main className="container">
-        <h1>To-Do</h1>
-        <Form
-          tasks={tasks}
-          setTasks={setTasks}
-          updateLocalStorage={updateLocalStorage}
-        />
+        <h1 className="title">Lista de Tarefas</h1>
+        <Form tasks={tasks} setTasks={setTasks} />
         <Tasks
           tasks={tasks}
           setTasks={setTasks}
           setTotalDeTasksCompletas={setTotalDeTasksCompletas}
-          updateLocalStorage={updateLocalStorage}
         />
       </main>
       <h3 className="tasks__completas">{`Total de tasks: ${tasks.length}`}</h3>

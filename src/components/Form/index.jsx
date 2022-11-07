@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import api from "../../services/api";
 import Button from "../Button";
 import "./Form.css";
 
-export default function Form({ tasks, setTasks, updateLocalStorage }) {
+export default function Form({ tasks, setTasks }) {
   const [valor, setValor] = useState("");
 
   const onChange = (evento) => {
@@ -12,12 +13,12 @@ export default function Form({ tasks, setTasks, updateLocalStorage }) {
   const onSubmit = (evento) => {
     evento.preventDefault();
     const novaTask = {
-      id: Math.random().toString(10).substring(2, 6),
+      id: Number(Math.random().toString(10).substring(2, 6)),
       titulo: valor,
       completa: false,
     };
+    api.post("/tasks", novaTask);
     setTasks([...tasks, novaTask]);
-    updateLocalStorage([...tasks, novaTask]);
     setValor("");
   };
 

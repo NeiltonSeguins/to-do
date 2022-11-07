@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 import cors from "cors";
 
 const port = 8080;
@@ -12,13 +12,7 @@ app.get("/", (req, res) => {
   res.json({ status: "To-do App" });
 });
 
-const tasks = [
-  {
-    id: 1,
-    titulo: "Estudar JavaScript",
-    completa: false,
-  },
-];
+const tasks = [];
 
 app
   .route("/tasks")

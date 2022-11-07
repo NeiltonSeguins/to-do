@@ -1,22 +1,28 @@
 import React from "react";
+import api from "../../services/api";
 import estilos from "./Tasks.module.css";
 
-export default function Tasks({ tasks, setTasks, updateLocalStorage }) {
+export default function Tasks({ tasks, setTasks }) {
   const marcaTaskCompleta = (id) => {
-    const taskCompleta = tasks.map((task) => {
+    tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, completa: !task.completa };
+        const taskAtualizada = { completa: !task.completa };
+        api
+          .put(`/tasks/${id}`, taskAtualizada)
+          .then((res) => setTasks(res.data))
+          .catch((err) => console.log(err));
       }
       return task;
     });
-    setTasks(taskCompleta);
-    updateLocalStorage(taskCompleta);
   };
 
   const removeTask = (id) => {
-    const novasTasks = tasks.filter((task) => task.id !== id);
-    setTasks(novasTasks);
-    updateLocalStorage(novasTasks);
+    api
+      .delete(`/tasks/${id}`)
+      .then((res) =>
+        console.log(`Status ${res.status} - Task deletada com sucesso`)
+      )
+      .catch((err) => console.log(`Parece que tivemos um erro = ${err}`));
   };
 
   return (
