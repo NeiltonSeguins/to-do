@@ -16,8 +16,8 @@ export default function Form({ tasks, setTasks, updateLocalStorage }) {
       titulo: valor,
       completa: false,
     };
-    updateLocalStorage([...tasks, novaTask]);
     setTasks([...tasks, novaTask]);
+    updateLocalStorage([...tasks, novaTask]);
     setValor("");
   };
 
