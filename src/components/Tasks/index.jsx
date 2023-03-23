@@ -20,7 +20,7 @@ export default function Tasks({ tasks, setTasks, updateLocalStorage }) {
   };
 
   return (
-    <ul>
+    <ul id="lista-tarefas">
       {tasks.map((task) => {
         return (
           <li key={task.id}>
@@ -31,8 +31,15 @@ export default function Tasks({ tasks, setTasks, updateLocalStorage }) {
             >
               <p>{task.titulo}</p>
               <span>
-                <button onClick={() => marcaTaskCompleta(task.id)}>✔️</button>
-                <button onClick={() => removeTask(task.id)}>❌</button>
+                <button
+                  id="completar-tarefa"
+                  onClick={() => marcaTaskCompleta(task.id)}
+                >
+                  ✔️
+                </button>
+                <button id="deletar-tarefa" onClick={() => removeTask(task.id)}>
+                  ❌
+                </button>
               </span>
             </div>
           </li>
